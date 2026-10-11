@@ -1,0 +1,61 @@
+/* Colour tokens: light by default, dark from the system setting or the toggle. Keep text contrast at 4.5:1 or more. */
+:root {
+  --paper: #F7F4EE; --card: #FFFFFF; --ink: #17140F; --muted: #5E574B; --line: #D9D2C4; --accent: #2346B5; --hi: #B4410F;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --paper: #15130F; --card: #1F1C17; --ink: #F2EDE3; --muted: #B3AB9C; --line: #3A352C; --accent: #9DB1FF; --hi: #FFB38A; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --paper: #15130F; --card: #1F1C17; --ink: #F2EDE3; --muted: #B3AB9C; --line: #3A352C; --accent: #9DB1FF; --hi: #FFB38A; color-scheme: dark; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1.0625rem/1.65 var(--font); }
+img, svg { max-width: 100%; height: auto; }
+a { color: var(--accent); text-underline-offset: .18em; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+main:focus { outline: none; }
+h1, h2, h3 { line-height: 1.15; letter-spacing: -.01em; }
+h1 { font-size: clamp(2.1rem, 6vw, 3.6rem); margin: 0 0 .4em; }
+h2 { font-size: clamp(1.4rem, 3.5vw, 1.9rem); margin: 1.6em 0 .5em; }
+h3 { font-size: 1.15rem; margin: 0 0 .4em; }
+code { font: .9em var(--mono); background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: .05em .35em; }
+
+.wrap { width: min(1080px, 100% - 32px); margin-inline: auto; }
+.skip { position: absolute; left: 16px; top: -100px; z-index: 10; background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 8px; }
+.skip:focus { top: 12px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.site-header { border-bottom: 1px solid var(--line); }
+.header-row { display: flex; align-items: center; gap: 16px; min-height: 64px; flex-wrap: wrap; }
+.brand { font-weight: 800; color: var(--ink); text-decoration: none; margin-right: auto; padding: 10px 0; }
+.nav { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
+.nav a { display: inline-block; padding: 10px 12px; min-height: 44px; color: var(--ink); text-decoration: none; border-radius: 8px; }
+.nav a:hover, .nav a[aria-current="page"] { background: var(--card); text-decoration: underline; }
+.theme-toggle { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--ink); cursor: pointer; }
+
+.hero { padding: clamp(48px, 10vw, 112px) 0 clamp(32px, 6vw, 64px); max-width: 860px; }
+.kicker { font: 700 .8rem/1 var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+.hi { color: var(--hi); }
+.lead { font-size: 1.2rem; color: var(--muted); max-width: 60ch; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.button { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 999px; background: var(--ink); color: var(--paper); font-weight: 700; text-decoration: none; border: 2px solid var(--ink); }
+.button.ghost { background: transparent; color: var(--ink); }
+.button:hover { text-decoration: underline; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; padding-bottom: 64px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+.card p { margin: 0; color: var(--muted); }
+
+.prose { max-width: 720px; padding: 48px 0 72px; }
+.prose li { margin: .35em 0; }
+
+.site-footer { border-top: 1px solid var(--line); color: var(--muted); }
+.footer-row { display: flex; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; padding: 20px 0; }
+.footer-row p { margin: 0; }
+.footer-row a, .link-button { display: inline-block; padding: 10px 2px; min-height: 44px; }
+.link-button { background: none; border: 0; color: var(--accent); font: inherit; text-decoration: underline; cursor: pointer; }
+
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }

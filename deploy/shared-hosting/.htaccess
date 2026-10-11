@@ -1,0 +1,17 @@
+# For shared hosting (cPanel) where the whole project is uploaded into public_html:
+# put this file at public_html/.htaccess. It sends every request into public/, so the rest of the project
+# (.env, vendor, storage) is never reachable from the web.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Let the host's SSL renewal (AutoSSL / Let's Encrypt) reach its check files.
+    RewriteRule ^\.well-known/ - [L]
+
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Belt and braces: never serve these, even if the rewrite above is missing.
+<FilesMatch "^\.env|composer\.(json|lock)|artisan$">
+    Require all denied
+</FilesMatch>
